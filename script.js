@@ -17,17 +17,17 @@ function playRound(computerSelection, playerSelection){
         (computerFinal == "scissors" && playerFinal == "paper") ||
         (computerFinal == "paper" && playerFinal == "rock")
       ) {
-        return 'loss'
+        return console.log('loss')
     }
     else if ((computerFinal) == (playerFinal)) {
-        return 'tie'
+        return console.log('tie')
     }
     else if (
         (playerFinal == "rock" && computerFinal == "scissors") ||
         (playerFinal == "scissors" && computerFinal == "paper") ||
         (playerFinal == "paper" && computerFinal == "rock")
       ) {
-        return 'won'
+        return console.log('won')
     }
 }
 
@@ -60,7 +60,7 @@ const buttons = body.querySelectorAll('button')
 buttons.forEach((button)=>{button.addEventListener('click',function(e){
     playerSelection = button.id
     computerSelection = getComputerChoice()
-    playRound(computerSelection, playerSelection)
+    return playRound(computerSelection, playerSelection)
 }
 )})
 
