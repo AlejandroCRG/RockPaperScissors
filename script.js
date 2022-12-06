@@ -7,33 +7,17 @@ const computerChoices= [
 function getComputerChoice(){ 
     let computerSelection = computerChoices[Math.floor(Math.random() * computerChoices.length)]
     return computerSelection
-    }
-
-function playRound(computerSelection, playerSelection){
-    computerFinal = computerSelection.toLowerCase();
-    playerFinal = playerSelection.toLowerCase();
-    if (
-        (computerFinal == "rock" && playerFinal == "scissors") ||
-        (computerFinal == "scissors" && playerFinal == "paper") ||
-        (computerFinal == "paper" && playerFinal == "rock")
-      ) {
-        return console.log('loss')
-    }
-    else if ((computerFinal) == (playerFinal)) {
-        return console.log('tie')
-    }
-    else if (
-        (playerFinal == "rock" && computerFinal == "scissors") ||
-        (playerFinal == "scissors" && computerFinal == "paper") ||
-        (playerFinal == "paper" && computerFinal == "rock")
-      ) {
-        return console.log('won')
-    }
 }
 
 let countLOSS = 0
 let countWIN = 0
 let countTIE = 0
+
+let divloss = document.createElement('div')
+let divwin = document.createElement('div')
+
+divloss.setAttribute('id', 'losses')
+divwin.setAttribute('id', 'wins')
 
 let Rockbutton = document.createElement('button')
 let Paperbutton = document.createElement('button')
@@ -54,8 +38,46 @@ Scissorsbutton.setAttribute('class', 'btn')
 Scissorsbutton.setAttribute('id','Scissors')
 Scissorsbutton.textContent = 'Scissors'
 body.appendChild(Scissorsbutton)
+          
+
 
 const buttons = body.querySelectorAll('button')
+
+function playRound(computerSelection, playerSelection){
+    computerFinal = computerSelection.toLowerCase();
+    playerFinal = playerSelection.toLowerCase();
+    if (
+        (computerFinal == "rock" && playerFinal == "scissors") ||
+        (computerFinal == "scissors" && playerFinal == "paper") ||
+        (computerFinal == "paper" && playerFinal == "rock")
+      ) {
+        countLOSS++
+        divloss.textContent = countLOSS + ' losses'
+        body.appendChild(divloss) 
+        if (countLOSS === 5){
+            divloss.textContent = 'YA LOST BRUDDA'
+            document.getElementById("wins").remove()
+        }    
+        
+    }
+    else if ((computerFinal) == (playerFinal)) {
+        return console.log('tie')
+    }
+    else if (
+        (playerFinal == "rock" && computerFinal == "scissors") ||
+        (playerFinal == "scissors" && computerFinal == "paper") ||
+        (playerFinal == "paper" && computerFinal == "rock")
+      ) {
+        countWIN++
+        divwin.textContent = countWIN + ' wins'
+        body.appendChild(divwin)
+        if (countWIN ===5){
+            divwin.textContent = 'YA WON BRUDDA'
+            document.getElementById("losses").remove()
+        }  
+        
+    }
+}
 
 buttons.forEach((button)=>{button.addEventListener('click',function(e){
     playerSelection = button.id
